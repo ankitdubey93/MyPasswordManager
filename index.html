@@ -9,24 +9,17 @@
 </head>
 
 <body>
-  <div class="creation-box">
-    <div>
-      <div>Account Name</div>
+  <form id="passwordForm">
+    <label for="platform-website">Website/Platform:</label>
+    <input type="text" id="website-platform" required><br>
+    <label for="usernmae">Username/Email:</label>
+    <input type="text" id="username" requred><br>
+    <label for="password-pin">Password/Pin:</label>
+    <input type="password" id="password" required><br>
+    <button type="button" onclick="savePassword()">Save</button>
+  </form>
 
-      <Input></Input>
-    </div>
-    <div>
-      <div>Username</div>
-      <Input></Input>
-    </div>
-    <div>
-      <div>Password/Key/Pin</div>
-      <Input></Input>
-    </div>
-    <div>
-      <button>Submit</button>
-    </div>
-  </div>
+
   <script src="mpm.js"></script>
 </body>
 
