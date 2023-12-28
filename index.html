@@ -4,22 +4,42 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Password Manager</title>
+  <title>Password Manager</title>
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-  <form id="passwordForm">
-    <label for="platform-website">Website/Platform:</label>
-    <input type="text" id="website-platform" required><br>
-    <label for="usernmae">Username/Email:</label>
-    <input type="text" id="username" requred><br>
-    <label for="password-pin">Password/Pin:</label>
-    <input type="password" id="password" required><br>
-    <button type="button" onclick="savePassword()">Save</button>
+  <h1>Personal Password Manager</h1>
+
+  <form id="myForm">
+
+    <label for="website">Website:</label>
+    <input type="text" id="website" name="website" required>
+    <br><br>
+
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username" required>
+    <br><br>
+
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required>
+    <br>
+
+    <button class="btn" onclick="savePassword()" type="button">Submit</button>
   </form>
 
-
+  <table id="formDataTable" border="1">
+    <thead>
+      <tr>
+        <th>Website/Account</th>
+        <th>Username</th>
+        <th>Password/Pin</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Form data will be dynamically added here -->
+    </tbody>
+  </table>
   <script src="mpm.js"></script>
 </body>
 
