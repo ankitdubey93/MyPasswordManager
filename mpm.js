@@ -20,6 +20,7 @@ const savePassword = () => {
 
   console.log(formDataArray);
 
+
   displayFormData();
   saveToLocalStorage();
 
@@ -31,6 +32,7 @@ const savePassword = () => {
 
 const displayFormData = () => {
 
+
   let tbody = document.getElementById('formDataTable').getElementsByTagName('tbody')[0];
 
   tbody.innerHTML = '';
@@ -40,6 +42,8 @@ const displayFormData = () => {
     let c1 = row.insertCell(0);
     let c2 = row.insertCell(1);
     let c3 = row.insertCell(2);
+    let c4 = row.insertCell(3);
+    let c5 = row.insertCell(4);
 
 
     c1.textContent = data.account;
@@ -50,9 +54,9 @@ const displayFormData = () => {
     editButton.textContent = 'Edit';
     editButton.addEventListener('click', function () {
       populateEditform(data);
-    });
 
-    row.appendChild(editButton);
+    })
+
 
     let deleteButton = document.createElement('button');
     deleteButton.textContent = 'Delete';
@@ -60,11 +64,13 @@ const displayFormData = () => {
       handleDeleteButton(data);
     });
 
-    row.appendChild(deleteButton);
+    c4.appendChild(editButton);
+    c5.appendChild(deleteButton);
 
 
   });
 }
+
 
 const handleDeleteButton = (data) => {
   const index = formDataArray.indexOf(data);
@@ -86,6 +92,7 @@ const populateEditform = (data) => {
   document.getElementById('submitButton').addEventListener('click', function () {
 
     updateData(data);
+
   })
 }
 
@@ -124,5 +131,5 @@ const loadFromLocalStorage = () => {
 
 
 
-
 window.onload = loadFromLocalStorage;
+
