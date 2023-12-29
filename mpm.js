@@ -21,6 +21,7 @@ const savePassword = () => {
   console.log(formDataArray);
 
   displayFormData();
+  saveToLocalStorage();
 
   document.getElementById('myForm').reset();
 
@@ -45,5 +46,83 @@ const displayFormData = () => {
     c2.textContent = data.id;
     c3.textContent = data.pass;
 
+    let editButton = document.createElement('button');
+    editButton.textContent = 'Edit';
+    editButton.addEventListener('click', function () {
+      populateEditform(data);
+    });
+
+    row.appendChild(editButton);
+
+    let deleteButton = document.createElement('button');
+    deleteButton.textContent = 'Delete';
+    deleteButton.addEventListener('click', function () {
+      handleDeleteButton(data);
+    });
+
+    row.appendChild(deleteButton);
+
+
   });
 }
+
+const handleDeleteButton = (data) => {
+  const index = formDataArray.indexOf(data);
+  if (index !== -1) {
+    formDataArray.splice(index, 1);
+    displayFormData();
+    saveToLocalStorage();
+  }
+}
+
+
+const populateEditform = (data) => {
+  document.getElementById('website').value = data.account;
+  document.getElementById('username').value = data.id;
+  document.getElementById('password').value = data.pass;
+
+  document.getElementById('submitButton').textContent = 'Update';
+  document.getElementById('submitButton').removeEventListener('click', savePassword);
+  document.getElementById('submitButton').addEventListener('click', function () {
+
+    updateData(data);
+  })
+}
+
+const updateData = (data) => {
+
+  data.account = document.getElementById('website').value;
+  data.id = document.getElementById('username').value;
+  data.pass = document.getElementById('password').value;
+
+
+  document.getElementById('myForm').reset();
+
+
+  displayFormData();
+  saveToLocalStorage();
+
+  document.getElementById('submitButton').textContent = 'Submit';
+  document.getElementById('submitButton').removeEventListener('click', updateData);
+  document.getElementById('submitButton').addEventListener('click', savePassword);
+}
+
+
+
+const saveToLocalStorage = () => {
+  localStorage.setItem('formDataArray', JSON.stringify(formDataArray));
+  console.log('success');
+}
+
+const loadFromLocalStorage = () => {
+  const storedData = localStorage.getItem('formDataArray');
+  if (storedData) {
+    formDataArray = JSON.parse(storedData);
+    displayFormData();
+  }
+}
+
+
+
+
+window.onload = loadFromLocalStorage;
