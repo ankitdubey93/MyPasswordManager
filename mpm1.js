@@ -3,7 +3,7 @@ let formDataArray = [];
 
 
 
-const savePassword = () => {
+const saveNewPassword = () => {
   let website = document.getElementById('website').value;
   let username = document.getElementById('username').value;
   let password = document.getElementById('password').value;
@@ -15,23 +15,20 @@ const savePassword = () => {
   };
 
   console.log(formData);
+  formDataArray.push(formData);
   console.log(formDataArray);
-
-  formDataArray = [...formDataArray, formData];
-
-
   saveToLocalStorage();
-  displayFormData();
-
+  loadFromLocalStorage();
   document.getElementById('myForm').reset();
 
 }
 
+const saveToLocalStorage = () => {
+  localStorage.setItem('formDataArray', JSON.stringify(formDataArray));
+  console.log('successfully saved');
+}
 
-
-const displayFormData = () => {
-  console.log(formDataArray);
-
+const displayTable = () => {
   let tbody = document.getElementById('formDataTable').getElementsByTagName('tbody')[0];
 
   tbody.innerHTML = '';
@@ -49,10 +46,11 @@ const displayFormData = () => {
     c2.textContent = data.id;
     c3.textContent = data.pass;
 
+
     let editButton = document.createElement('button');
     editButton.textContent = 'Edit';
     editButton.addEventListener('click', function () {
-      populateEditform(data);
+
 
     })
 
@@ -61,72 +59,39 @@ const displayFormData = () => {
     deleteButton.textContent = 'Delete';
     deleteButton.addEventListener('click', function () {
       handleDeleteButton(data);
+
     });
 
     c4.appendChild(editButton);
     c5.appendChild(deleteButton);
 
-
   });
+
 }
 
 
 const handleDeleteButton = (data) => {
   const index = formDataArray.indexOf(data);
-  if (index !== -1) {
-    formDataArray.splice(index, 1);
-    displayFormData();
-    saveToLocalStorage();
-  }
-}
-
-
-const populateEditform = (data) => {
-  document.getElementById('website').value = data.account;
-  document.getElementById('username').value = data.id;
-  document.getElementById('password').value = data.pass;
-
-  document.getElementById('editButton').addEventListener('click', function () {
-
-    updateData(data);
-
-  })
-}
-
-const updateData = (data) => {
-
-  data.account = document.getElementById('website').value;
-  data.id = document.getElementById('username').value;
-  data.pass = document.getElementById('password').value;
-
-
-  document.getElementById('myForm').reset();
-
-
-  displayFormData();
+  formDataArray.splice(index, 1);
   saveToLocalStorage();
-
-  document.getElementById('submitButton').textContent = 'Submit';
-  document.getElementById('submitButton').removeEventListener('click', updateData);
-  document.getElementById('submitButton').addEventListener('click', savePassword);
+  loadFromLocalStorage();
 }
 
 
-
-const saveToLocalStorage = () => {
-  localStorage.setItem('formDataArray', JSON.stringify(formDataArray));
-  console.log('success');
-}
 
 const loadFromLocalStorage = () => {
   const storedData = localStorage.getItem('formDataArray');
   if (storedData) {
     formDataArray = JSON.parse(storedData);
-    displayFormData();
+    console.log('loaded');
+    console.log(formDataArray);
+    displayTable();
   }
 }
 
+const init = () => {
+  window.onload = loadFromLocalStorage;
+}
 
 
-window.onload = loadFromLocalStorage;
-
+init();

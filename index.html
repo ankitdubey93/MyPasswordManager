@@ -9,6 +9,9 @@
 </head>
 
 <body>
+  <div class="Ankit">
+    <h1>Ankit</h1>
+  </div>
   <h1>Personal Password Manager</h1>
 
   <form id="myForm">
@@ -24,25 +27,30 @@
     <label for="password">Password:</label>
     <input type="password" id="password" name="password" required>
     <br>
-
-    <button id="submitButton" onclick="savePassword()" type="button">Submit</button>
+    <div>
+      <button id="submitButton" onclick="saveNewPassword()" type="button">Submit</button>
+      <button id="editButton" type="button">Update</button>
+    </div>
   </form>
 
-  <table id="formDataTable" border="1">
-    <thead>
-      <tr>
-        <th>Website/Account</th>
-        <th>Username</th>
-        <th>Password/Pin</th>
+  <div class="display-table">
+    <label for="search">Search</label>
+    <input type="text" id="findText" name="find">
+    <table id="formDataTable" border="1">
+      <thead>
+        <tr>
+          <th>Website/Account</th>
+          <th>Username</th>
+          <th>Password/Pin</th>
 
-      </tr>
-      </tr>
-    </thead>
-    <tbody>
-      <!-- Form data will be dynamically added here -->
-    </tbody>
-  </table>
-  <script src="mpm.js"></script>
+        </tr>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+  </div>
+  <script src="mpm1.js"></script>
 </body>
 
 </html>
